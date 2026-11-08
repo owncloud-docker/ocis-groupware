@@ -41,7 +41,7 @@
     "eslint": "9.39.5",
     "happy-dom": "21.0.4",
     "luxon": "3.7.2",
-    "typescript": "5.9.3",
+    "typescript": "7.0.2",
     "vite": "7.3.7",
     "vitest": "4.1.12",
     "vue": "3.5.44",
