@@ -20,6 +20,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # lowercase description, as in the Conventional Commits examples
-          subjectPattern: '^(?![A-Z]).+$'
+          # Lowercase description, as in the Conventional Commits examples.
+          # Dependabot writes "Bump x from a to b" after the configured
+          # prefix and cannot be told to lowercase it, so for its own PRs
+          # only the type is enforced. The author of the PR is checked, not
+          # the actor, so a human pushing to a Dependabot branch changes
+          # nothing and a human PR cannot use the exemption.
+          subjectPattern: ${{ github.event.pull_request.user.login == 'dependabot[bot]' && '^.+$' || '^(?![A-Z]).+$' }}
           subjectPatternError: 'The description "{subject}" must start with a lowercase letter.'
