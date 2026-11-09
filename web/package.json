@@ -46,7 +46,7 @@
     "vitest": "4.1.12",
     "vue": "3.5.44",
     "vue-router": "5.4.0",
-    "vue-tsc": "3.3.13",
+    "vue-tsc": "3.3.14",
     "vue3-gettext": "4.0.1"
   }
 }
