@@ -901,6 +901,16 @@ addresses.
 
 ## Docker
 
+Released images are published to Docker Hub as
+[`owncloud/ocis-groupware`](https://hub.docker.com/r/owncloud/ocis-groupware), built by
+[owncloud-docker/ocis-groupware](https://github.com/owncloud-docker/ocis-groupware):
+
+```sh
+docker pull owncloud/ocis-groupware:latest
+```
+
+To build and run the image from a checkout:
+
 ```sh
 task docker:build
 task docker:run

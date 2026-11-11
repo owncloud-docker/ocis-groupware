@@ -12,7 +12,7 @@ helm install groupware deploy/helm/ocis-groupware \
 ```
 
 The chart is not published to a registry yet; install it from a checkout. The image
-defaults to `ghcr.io/owncloud/ocis-groupware` at the chart's `appVersion`.
+defaults to `owncloud/ocis-groupware` on Docker Hub at the chart's `appVersion`.
 
 ## What it deploys
 
@@ -94,7 +94,7 @@ kubectl -n ocis exec deploy/groupware-ocis-groupware -- /ocis-groupware admin pr
 
 | Value | Default | Description |
 |---|---|---|
-| `image.repository` | `ghcr.io/owncloud/ocis-groupware` | Image repository |
+| `image.repository` | `owncloud/ocis-groupware` | Image repository |
 | `image.tag` | `""` | Image tag; the chart's `appVersion` when empty |
 | `image.pullPolicy` | `IfNotPresent` | |
 | `imagePullSecrets` | `[]` | |
