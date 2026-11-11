@@ -9,7 +9,7 @@ This project follows the ownCloud Code of Conduct, see
 
 ## Prerequisites
 
-- Go 1.26.10
+- Go 1.27.4
 - [go-task](https://taskfile.dev)
 - Docker (only needed for `task docker:*`)
 
