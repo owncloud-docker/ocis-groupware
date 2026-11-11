@@ -17,8 +17,8 @@ with a clean working tree and passing CI. It refuses to continue otherwise.
 The Helm chart's image tag defaults to its `appVersion`, so before a release, merge a
 change that sets `appVersion` in `deploy/helm/ocis-groupware/Chart.yaml` to the version
 being released, without the `v` (for `v1.2.0`, `appVersion: "1.2.0"`). The script refuses
-to tag a version that does not match `appVersion`, and the Release workflow refuses such
-a tag too.
+to tag a version that does not match `appVersion` (a dry run only warns, so you can see the
+version first), and the Release workflow refuses such a tag too.
 
 It reads the commits since the last tag. A `feat` raises the minor version, a
 `fix`, `perf` or `revert` raises the patch version, and a breaking change
