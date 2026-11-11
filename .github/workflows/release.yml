@@ -44,6 +44,14 @@ jobs:
             echo "::error::The signature of $TAG is not verified."
             exit 1
           fi
+          # The chart defaults the image tag to its appVersion, which has to
+          # name this release (scripts/release checks the same).
+          app=$(gh api "repos/$GH_REPO/contents/deploy/helm/ocis-groupware/Chart.yaml?ref=$TAG" --jq .content |
+            base64 -d | sed -n 's/^appVersion: *"\{0,1\}\([^"]*\)"\{0,1\}$/\1/p')
+          if [ "$app" != "${TAG#v}" ]; then
+            echo "::error::deploy/helm/ocis-groupware/Chart.yaml at $TAG has appVersion ${app:-(none)}, not ${TAG#v}."
+            exit 1
+          fi
           # Drop the first line (the version) and the blank line after it, and
           # any signature block the API adds to the message.
           jq -r .message <<<"$tag" | tail -n +3 | sed '/^-----BEGIN .* SIGNATURE-----$/,$d' >notes.md
