@@ -195,7 +195,7 @@ a bind mount, give uid 65532 write access to the host directory. A minimal run:
 ```sh
 docker run -d --name groupware -v groupware-data:/data \
   -e GROUPWARE_OIDC_ISSUER=https://ocis.example.com \
-  -p 8080:8080 ghcr.io/owncloud/ocis-groupware:<version>
+  -p 8080:8080 owncloud/ocis-groupware:<version>
 ```
 
 The [Helm chart](../deploy/helm/ocis-groupware/README.md) runs one replica on a

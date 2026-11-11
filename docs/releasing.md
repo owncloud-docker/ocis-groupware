@@ -33,21 +33,26 @@ describes how commit titles end up in the notes.
 
 The Release workflow (`.github/workflows/release.yml`) first checks that the
 tag is an annotated tag whose signature GitHub verifies, and takes the notes
-from its message. Lightweight and unverified tags are refused. Then it runs two
-jobs:
-
-- **Binaries and GitHub release.** [GoReleaser](https://goreleaser.com) builds
-  `ocis-groupware` for linux and darwin on amd64 and arm64, with the web app
-  embedded. It uploads one `.tar.gz` per platform, a `checksums.txt` with
-  SHA-256 sums and an SPDX SBOM for each archive, and creates the GitHub
-  release with the notes. The settings are in `.goreleaser.yaml`.
-- **Container image.** The image from the `Dockerfile` is built for linux/amd64
-  and linux/arm64 and pushed to `ghcr.io/<owner>/ocis-groupware`, with an SBOM
-  and a provenance attestation. A stable release gets the tags `X.Y.Z`, `X.Y`
-  and `latest`. A pre-release gets only its own version tag.
+from its message. Lightweight and unverified tags are refused. Then it builds
+the binaries and the GitHub release: [GoReleaser](https://goreleaser.com) builds
+`ocis-groupware` for linux and darwin on amd64 and arm64, with the web app
+embedded. It uploads one `.tar.gz` per platform, a `checksums.txt` with SHA-256
+sums and an SPDX SBOM for each archive, and creates the GitHub release with the
+notes. The settings are in `.goreleaser.yaml`.
 
 To publish a release for a tag that already exists, run the workflow by hand
 and give it the tag name.
+
+## The container image
+
+This repository does not publish the container image.
+[owncloud-docker/ocis-groupware](https://github.com/owncloud-docker/ocis-groupware)
+builds it from the same signed tag and publishes it to Docker Hub as
+[`owncloud/ocis-groupware`](https://hub.docker.com/r/owncloud/ocis-groupware), for
+linux/amd64 and linux/arm64. It checks for new tags every 6 hours, and a maintainer
+there can start the build by hand. Only tags like `v1.2.3` are built: the release
+gets the tags `1.2.3` and `1.2.3-YYYYMMDD`, and the highest release also gets
+`latest`. Pre-release tags such as `v1.2.3-rc.1` get no image.
 
 ## Checking changes to the release setup
 

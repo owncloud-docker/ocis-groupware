@@ -2,7 +2,7 @@
 # describes every key.
 
 image:
-  repository: ghcr.io/owncloud/ocis-groupware
+  repository: owncloud/ocis-groupware
   # Defaults to the chart's appVersion.
   tag: ""
   pullPolicy: IfNotPresent
