@@ -3,7 +3,7 @@ name: ocis-groupware
 description: Calendar and contacts for ownCloud Infinite Scale, on one replica with a persistent volume
 type: application
 version: 0.1.0
-appVersion: "1.0.0"
+appVersion: "0.1.0"
 kubeVersion: ">=1.25.0-0"
 home: https://github.com/owncloud/ocis-groupware
 sources:

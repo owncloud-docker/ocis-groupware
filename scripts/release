@@ -67,6 +67,19 @@ if [ -n "$latest" ] &&
   [ "$(printf '%s\n%s\n' "$latest" "$version" | sort -V | tail -n 1)" != "$version" ]; then
   die "$version is not newer than $latest"
 fi
+# The chart defaults the image tag to its appVersion, so it has to name the
+# release, or the chart points at an image that does not exist. A dry run
+# only warns, so it still shows the version and the notes to prepare for.
+chart=deploy/helm/ocis-groupware/Chart.yaml
+app=$(sed -n 's/^appVersion: *"\{0,1\}\([^"]*\)"\{0,1\}$/\1/p' "$chart")
+if [ "$app" != "${version#v}" ]; then
+  mismatch="$chart has appVersion ${app:-(none)}, but the release is ${version#v}: set it to ${version#v} and merge that first"
+  if $dry_run; then
+    echo "warning: $mismatch"
+  else
+    die "$mismatch"
+  fi
+fi
 
 notes=$(mktemp)
 message=$(mktemp)
